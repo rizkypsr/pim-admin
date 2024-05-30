@@ -294,30 +294,6 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-        // [
-        //     'type' => 'navbar-search',
-        //     'text' => 'search',
-        //     'topnav_right' => true,
-        // ],
-        // [
-        //     'type' => 'fullscreen-widget',
-        //     'topnav_right' => true,
-        // ],
-
-        // Sidebar items:
-        // [
-        //     'type' => 'sidebar-menu-search',
-        //     'text' => 'search',
-        // ],
-        // [
-        //     'text' => 'pages',
-        //     'url' => 'admin/pages',
-        //     'icon' => 'far fa-fw fa-file',
-        //     'label' => 4,
-        //     'label_color' => 'success',
-        // ],
-        // ['header' => 'account_settings'],
         [
             'text' => 'Dashboard',
             'url' => '',
@@ -472,6 +448,21 @@ return [
                     'asset' => true,
                     'location' => 'vendor/bs-custom-file-input/bs-custom-file-input.min.js',
                 ],
+            ],
+        ],
+        'toastr' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type'  => 'css',
+                    'asset' => false,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css'
+                ],
+                [
+                    'type'  => 'js',
+                    'asset' => false,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js'
+                ]
             ],
         ],
     ],
