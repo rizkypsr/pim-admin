@@ -32,8 +32,9 @@
                     <x-adminlte-select2 name="city_id" label="Kota" fgroup-class="col-md-4" enable-old-support>
                         <option value="" disabled>Pilih Kota</option>
                         @foreach ($cities as $city)
-                            <option value="{{ $city->id }}" {{ $city->id == $car->city_id }}>
-                                {{ $city->city_name }}</option>
+                            <option value="{{ $city->id }}" {{ $city->id == $car->city_id ? 'selected' : '' }}>
+                                {{ $city->city_name }}
+                            </option>
                         @endforeach
                     </x-adminlte-select2>
                 </div>

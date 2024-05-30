@@ -33,8 +33,9 @@
                     <x-adminlte-select2 name="showroom_id" label="Showroom" fgroup-class="col-md-4" enable-old-support>
                         <option value="" disabled>Pilih Showroom</option>
                         @foreach ($showrooms as $showroom)
-                            <option value="{{ $showroom->id }}" {{ $showroom->id == $car->showroom_id }}>
-                                {{ $showroom->showroom_name }}</option>
+                            <option value="{{ $showroom->id }}" {{ $showroom->id == $car->showroom_id ? 'selected' : '' }}>
+                                {{ $showroom->showroom_name }}
+                            </option>
                         @endforeach
                     </x-adminlte-select2>
                 </div>
