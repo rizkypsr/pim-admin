@@ -107,6 +107,7 @@ class CarController extends Controller
             'year.numeric' => 'Tahun Mobil harus berupa angka.',
             'year.digits' => 'Tahun Mobil harus 4 digit.',
             'city_id.required' => 'Kota wajib diisi.',
+            'city_id.exists' => 'Kota tidak ditemukan.',
             'images.max' => 'Ukuran gambar maksimal 2MB.',
             'whatsapp_number.required' => 'Nomor WA wajib diisi.',
         ];
@@ -212,6 +213,7 @@ class CarController extends Controller
             'year' => 'required|numeric|digits:4',
             'images' => 'max:2048',
             'whatsapp_number' => 'required|string|max:255',
+            'city_id' => 'required|exists:cities,id',
         ];
 
         $messages = [
@@ -226,6 +228,8 @@ class CarController extends Controller
             'year.digits' => 'Tahun Mobil harus 4 digit.',
             'images.max' => 'Ukuran gambar maksimal 2MB.',
             'whatsapp_number.required' => 'Nomor WA wajib diisi.',
+            'city_id.required' => 'Kota wajib diisi.',
+            'city_id.exists' => 'Kota tidak ditemukan.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -243,6 +247,7 @@ class CarController extends Controller
             'year' => $request->year,
             'showroom_id' => $request->showroom_id,
             'whatsapp_number' => $request->whatsapp_number,
+            'city_id' => $request->city_id,
         ]);
 
         return redirect()->route('cars.index')->with('success', 'Mobil berhasil diperbarui.');
