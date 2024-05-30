@@ -30,8 +30,7 @@ class FaqController extends Controller
 
         $config = [
             'data' => $data,
-            'order' => [[1, 'asc']],
-            'columns' => [null, null, null, null],
+            'columns' => [null, null, ['orderable' => false], ['orderable' => false]],
         ];
 
         $heads = [

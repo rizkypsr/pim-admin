@@ -38,8 +38,7 @@ class ShowroomController extends Controller
 
         $config = [
             'data' => $data,
-            'order' => [[1, 'asc']],
-            'columns' => [null, null, null, null, null, ['orderable' => false]],
+            'columns' => [null, null, ['orderable' => false], ['orderable' => false], null, ['orderable' => false]],
         ];
 
         $heads = [
@@ -151,7 +150,7 @@ class ShowroomController extends Controller
                 null,
                 null,
                 null,
-                null,
+                ['orderable' => false],
                 ['orderable' => false],
                 ['orderable' => false]
             ],
