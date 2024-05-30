@@ -26,13 +26,13 @@ class ShowroomController extends Controller
                 $showroom->id,
                 $showroom->showroom_name,
                 $showroom->video,
-                '<a href="https://wa.me/' . "62" . substr($showroom->whatsapp_number, 1) . '" target="_blank">' . $showroom->whatsapp_number . '</a>',
+                '<a href="https://wa.me/'.'62'.substr($showroom->whatsapp_number, 1).'" target="_blank">'.$showroom->whatsapp_number.'</a>',
                 $showroom->city->city_name,
                 view('components.action-buttons', [
                     'editRoute' => route('showrooms.edit', $showroom->id),
                     'deleteRoute' => route('showrooms.destroy', $showroom->id),
                     'showRoute' => route('showrooms.show', $showroom->id),
-                ])->render()
+                ])->render(),
             ];
         });
 
@@ -73,7 +73,7 @@ class ShowroomController extends Controller
             'video' => 'required|string|max:255',
             'whatsapp_number' => 'required|string|max:255',
             'city_id' => 'required|exists:cities,id',
-            'images' => 'max:2048'
+            'images' => 'max:2048',
         ];
 
         $messages = [
@@ -84,7 +84,7 @@ class ShowroomController extends Controller
             'city_id.required' => 'Kota wajib dipilih.',
             'video.required' => 'Video wajib diisi.',
             'whatsapp_number.required' => 'Nomor WA wajib diisi.',
-            'images.max' => 'Ukuran gambar maksimal 2MB.'
+            'images.max' => 'Ukuran gambar maksimal 2MB.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -104,7 +104,7 @@ class ShowroomController extends Controller
             $images = $request->file('images');
 
             foreach ($images as $image) {
-                $imageName = time() . '_' . $image->getClientOriginalName();
+                $imageName = time().'_'.$image->getClientOriginalName();
                 $image->storeAs('showroom', $imageName, 'public');
 
                 ShowroomImage::create([
@@ -131,13 +131,13 @@ class ShowroomController extends Controller
                 $car->brand_name,
                 RupiahFormat::currency($car->price),
                 $car->year,
-                $car->whatsapp_number ?? "-",
-                '<a href="' . $car->video . '" target="_blank">' . $car->video . '</a>',
+                $car->whatsapp_number ?? '-',
+                '<a href="'.$car->video.'" target="_blank">'.$car->video.'</a>',
                 view('components.action-buttons', [
                     'editRoute' => route('showrooms.editCar', $car->id),
                     'deleteRoute' => route('cars.destroy', $car->id),
                     'showRoute' => route('cars.show', $car->id),
-                ])->render()
+                ])->render(),
             ];
         });
 
@@ -152,7 +152,7 @@ class ShowroomController extends Controller
                 null,
                 ['orderable' => false],
                 ['orderable' => false],
-                ['orderable' => false]
+                ['orderable' => false],
             ],
         ];
 
@@ -168,14 +168,14 @@ class ShowroomController extends Controller
         ];
 
         $dataImage = $showroom->showroomImages->map(function ($showroom) {
-            $path = Storage::url('showroom/' . $showroom->filename);
+            $path = Storage::url('showroom/'.$showroom->filename);
 
             return [
                 $showroom->id,
-                '<img src="' . $path . '" alt="Gambar Showroom" class="img-thumbnail" style="width: 100px;">',
+                '<img src="'.$path.'" alt="Gambar Showroom" class="img-thumbnail" style="width: 100px;">',
                 view('components.only-delete-button', [
                     'deleteRoute' => route('showrooms.destroyImage', $showroom->id),
-                ])->render()
+                ])->render(),
             ];
         });
 
@@ -185,7 +185,7 @@ class ShowroomController extends Controller
             'columns' => [
                 null,
                 ['orderable' => false],
-                ['orderable' => false]
+                ['orderable' => false],
             ],
         ];
 
@@ -256,7 +256,7 @@ class ShowroomController extends Controller
         $showroom = Showroom::with('showroomImages')->findOrFail($id);
 
         foreach ($showroom->showroomImages as $showroomImage) {
-            $path = 'showroom/' . $showroomImage->filename;
+            $path = 'showroom/'.$showroomImage->filename;
 
             if (Storage::disk('public')->exists($path)) {
                 Storage::disk('public')->delete($path);
@@ -272,11 +272,10 @@ class ShowroomController extends Controller
     {
         $showroomImage = ShowroomImage::findOrFail($id);
 
-        $path = 'showroom/' . $showroomImage->filename;
+        $path = 'showroom/'.$showroomImage->filename;
 
         if (Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);
-
 
             $showroomImage->delete();
 
@@ -302,7 +301,7 @@ class ShowroomController extends Controller
             'year' => 'required|numeric|digits:4',
             'whatsapp_number' => 'required|string|max:255',
             'showroom_id' => 'required|exists:showrooms,id',
-            'images' => 'max:2048'
+            'images' => 'max:2048',
         ];
 
         $messages = [
@@ -343,7 +342,7 @@ class ShowroomController extends Controller
             $images = $request->file('images');
 
             foreach ($images as $image) {
-                $imageName = time() . '_' . $image->getClientOriginalName();
+                $imageName = time().'_'.$image->getClientOriginalName();
                 $image->storeAs('cars', $imageName, 'public');
 
                 CarImage::create([
@@ -403,6 +402,7 @@ class ShowroomController extends Controller
 
         if ($validator->fails()) {
             dd($validator->errors());
+
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
@@ -416,7 +416,6 @@ class ShowroomController extends Controller
             'whatsapp_number' => $request->whatsapp_number,
             'showroom_id' => $request->showroom_id,
         ]);
-
 
         return redirect()->route('showrooms.show', $request->showroom_id)->with('success', 'Mobil berhasil diubah.');
     }

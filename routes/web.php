@@ -9,7 +9,6 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\ShowroomController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +20,6 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 
 Auth::routes();
 

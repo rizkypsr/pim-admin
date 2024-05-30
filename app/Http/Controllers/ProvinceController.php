@@ -23,7 +23,7 @@ class ProvinceController extends Controller
                     'editRoute' => route('provinces.edit', $province->id),
                     'deleteRoute' => route('provinces.destroy', $province->id),
                     'showRoute' => route('provinces.show', $province->id),
-                ])->render()
+                ])->render(),
             ];
         });
 

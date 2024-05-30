@@ -8,9 +8,10 @@ use Illuminate\View\Component;
 
 class ActionButtons extends Component
 {
-
     public $editRoute;
+
     public $deleteRoute;
+
     public $showRoute;
 
     /**

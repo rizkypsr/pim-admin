@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Showroom;
-use Illuminate\Http\Request;
 
 class ShowroomApiController extends Controller
 {
@@ -25,7 +24,7 @@ class ShowroomApiController extends Controller
         try {
             $showroom = Showroom::with(['city', 'showroomImages', 'cars'])->find($id);
 
-            if (!$showroom) {
+            if (! $showroom) {
                 return ApiResponse::error('Not Found', 404, 'Data showroom tidak ditemukan.');
             }
 

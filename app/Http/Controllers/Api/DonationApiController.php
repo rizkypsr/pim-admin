@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Donation;
-use Illuminate\Http\Request;
 
 class DonationApiController extends Controller
 {
@@ -25,7 +24,7 @@ class DonationApiController extends Controller
         try {
             $donation = Donation::with('images')->find($id);
 
-            if (!$donation) {
+            if (! $donation) {
                 return ApiResponse::error('Not Found', 404, 'Data donasi tidak ditemukan.');
             }
 

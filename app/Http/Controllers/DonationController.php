@@ -23,12 +23,12 @@ class DonationController extends Controller
                 $donation->title,
                 $donation->subtitle,
                 $donation->description,
-                '<a href="' . $donation->video . '">' . $donation->video . '</a>',
+                '<a href="'.$donation->video.'">'.$donation->video.'</a>',
                 view('components.action-buttons', [
                     'editRoute' => route('donations.edit', $donation->id),
                     'deleteRoute' => route('donations.destroy', $donation->id),
                     'showRoute' => route('donations.show', $donation->id),
-                ])->render()
+                ])->render(),
             ];
         });
 
@@ -74,7 +74,7 @@ class DonationController extends Controller
             'subtitle' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'video' => 'nullable|string|max:255',
-            'images' => 'max:2048'
+            'images' => 'max:2048',
         ];
 
         $messages = [
@@ -86,7 +86,7 @@ class DonationController extends Controller
             'description.required' => 'Deskripsi harus diisi.',
             'description.max' => 'Deskripsi maksimal 255 karakter.',
             'video.max' => 'Link video maksimal 255 karakter.',
-            'images.max' => 'Ukuran gambar maksimal 2MB.'
+            'images.max' => 'Ukuran gambar maksimal 2MB.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -106,7 +106,7 @@ class DonationController extends Controller
             $images = $request->file('images');
 
             foreach ($images as $image) {
-                $imageName = time() . '_' . $image->getClientOriginalName();
+                $imageName = time().'_'.$image->getClientOriginalName();
                 $image->storeAs('donations', $imageName, 'public');
 
                 DonationImage::create([
@@ -127,14 +127,14 @@ class DonationController extends Controller
         $donation = Donation::with('images')->findOrFail($id);
 
         $data = $donation->images->map(function ($image) {
-            $path = Storage::url('donations/' . $image->filename);
+            $path = Storage::url('donations/'.$image->filename);
 
             return [
                 $image->id,
-                '<img src="' . $path . '" alt="Donation Image" class="img-thumbnail" style="width: 100px;">',
+                '<img src="'.$path.'" alt="Donation Image" class="img-thumbnail" style="width: 100px;">',
                 view('components.only-delete-button', [
                     'deleteRoute' => route('donations.destroyImage', $image->id),
-                ])->render()
+                ])->render(),
             ];
         });
 
@@ -144,10 +144,9 @@ class DonationController extends Controller
             'columns' => [
                 null,
                 ['orderable' => false],
-                ['orderable' => false]
+                ['orderable' => false],
             ],
         ];
-
 
         $heads = [
             ['label' => 'ID', 'width' => 1],
@@ -216,7 +215,7 @@ class DonationController extends Controller
         $donation = Donation::with('images')->findOrFail($id);
 
         foreach ($donation->images as $donationImage) {
-            $path = 'donations/' . $donationImage->filename;
+            $path = 'donations/'.$donationImage->filename;
 
             if (Storage::disk('public')->exists($path)) {
                 Storage::disk('public')->delete($path);
@@ -231,7 +230,7 @@ class DonationController extends Controller
     public function destroyImage(string $id)
     {
         $donationImage = DonationImage::findOrFail($id);
-        $path = 'donations/' . $donationImage->filename;
+        $path = 'donations/'.$donationImage->filename;
 
         if (Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);

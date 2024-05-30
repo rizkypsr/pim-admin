@@ -2,8 +2,6 @@
 
 namespace App\Helpers;
 
-use Illuminate\Http\JsonResponse;
-
 class ApiResponse
 {
     public static function error($message, $code = 404, $details = null)
@@ -14,7 +12,7 @@ class ApiResponse
             'message' => $message,
         ];
 
-        if (!is_null($details)) {
+        if (! is_null($details)) {
             $response['details'] = $details;
         }
 

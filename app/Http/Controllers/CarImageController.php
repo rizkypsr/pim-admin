@@ -62,7 +62,7 @@ class CarImageController extends Controller
     public function destroy(string $id)
     {
         $carImage = CarImage::findOrFail($id);
-        $path = 'cars/' . $carImage->filename;
+        $path = 'cars/'.$carImage->filename;
 
         if (Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);

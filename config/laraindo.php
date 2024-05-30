@@ -2,7 +2,7 @@
 
 return [
     'TanggalFormat' => [
-        "locale" => 'id',
-        "timezone" => 'Asia/Jakarta'
-    ]
+        'locale' => 'id',
+        'timezone' => 'Asia/Jakarta',
+    ],
 ];

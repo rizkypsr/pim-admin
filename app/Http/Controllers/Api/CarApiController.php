@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
-use Illuminate\Http\Request;
 
 class CarApiController extends Controller
 {
@@ -25,7 +24,7 @@ class CarApiController extends Controller
         try {
             $car = Car::with(['showroom', 'carImages'])->find($id);
 
-            if (!$car) {
+            if (! $car) {
                 return ApiResponse::error('Not Found', 404, 'Data mobil tidak ditemukan.');
             }
 
@@ -40,7 +39,7 @@ class CarApiController extends Controller
         try {
             $car = Car::with(['showroom', 'carImages'])->where('showroom_id', $id)->get();
 
-            if (!$car) {
+            if (! $car) {
                 return ApiResponse::error('Not Found', 404, 'Data mobil tidak ditemukan.');
             }
 

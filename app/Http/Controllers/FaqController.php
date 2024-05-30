@@ -24,7 +24,7 @@ class FaqController extends Controller
                 view('components.action-buttons', [
                     'editRoute' => route('faqs.edit', $faq->id),
                     'deleteRoute' => route('faqs.destroy', $faq->id),
-                ])->render()
+                ])->render(),
             ];
         });
 
@@ -40,8 +40,7 @@ class FaqController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5],
         ];
 
-
-        return view("faqs.index", compact('heads', 'config'));
+        return view('faqs.index', compact('heads', 'config'));
     }
 
     /**

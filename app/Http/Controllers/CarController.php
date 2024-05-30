@@ -26,14 +26,14 @@ class CarController extends Controller
                 $car->brand_name,
                 RupiahFormat::currency($car->price),
                 $car->year,
-                $car->whatsapp_number ?? "-",
-                $car->city->city_name ?? "-",
-                '<a href="' . $car->video . '" target="_blank">' . $car->video . '</a>',
+                $car->whatsapp_number ?? '-',
+                $car->city->city_name ?? '-',
+                '<a href="'.$car->video.'" target="_blank">'.$car->video.'</a>',
                 view('components.action-buttons', [
                     'editRoute' => route('cars.edit', $car->id),
                     'deleteRoute' => route('cars.destroy', $car->id),
                     'showRoute' => route('cars.show', $car->id),
-                ])->render()
+                ])->render(),
             ];
         });
 
@@ -48,10 +48,9 @@ class CarController extends Controller
                 ['orderable' => false],
                 null,
                 ['orderable' => false],
-                ['orderable' => false]
+                ['orderable' => false],
             ],
         ];
-
 
         $heads = [
             ['label' => 'ID', 'width' => 3],
@@ -92,7 +91,7 @@ class CarController extends Controller
             'year' => 'required|numeric|digits:4',
             'whatsapp_number' => 'required|string|max:255',
             'city_id' => 'required|exists:cities,id',
-            'images' => 'max:2048'
+            'images' => 'max:2048',
         ];
 
         $messages = [
@@ -133,7 +132,7 @@ class CarController extends Controller
             $images = $request->file('images');
 
             foreach ($images as $image) {
-                $imageName = time() . '_' . $image->getClientOriginalName();
+                $imageName = time().'_'.$image->getClientOriginalName();
                 $image->storeAs('cars', $imageName, 'public');
 
                 CarImage::create([
@@ -156,14 +155,14 @@ class CarController extends Controller
         $carImages = CarImage::where('car_id', $id)->get();
 
         $data = $carImages->map(function ($car) {
-            $path = Storage::url('cars/' . $car->filename);
+            $path = Storage::url('cars/'.$car->filename);
 
             return [
                 $car->id,
-                '<img src="' . $path . '" alt="Car Image" class="img-thumbnail" style="width: 100px;">',
+                '<img src="'.$path.'" alt="Car Image" class="img-thumbnail" style="width: 100px;">',
                 view('components.only-delete-button', [
                     'deleteRoute' => route('cars.destroyImage', $car->id),
-                ])->render()
+                ])->render(),
             ];
         });
 
@@ -173,10 +172,9 @@ class CarController extends Controller
             'columns' => [
                 null,
                 ['orderable' => false],
-                ['orderable' => false]
+                ['orderable' => false],
             ],
         ];
-
 
         $heads = [
             ['label' => 'ID', 'width' => 1],
@@ -261,7 +259,7 @@ class CarController extends Controller
         $car = Car::with('carImages')->findOrFail($id);
 
         foreach ($car->carImages as $carImage) {
-            $path = 'cars/' . $carImage->filename;
+            $path = 'cars/'.$carImage->filename;
 
             if (Storage::disk('public')->exists($path)) {
                 Storage::disk('public')->delete($path);
@@ -277,7 +275,7 @@ class CarController extends Controller
     {
         $carImage = CarImage::findOrFail($id);
 
-        $path = 'cars/' . $carImage->filename;
+        $path = 'cars/'.$carImage->filename;
 
         if (Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);

@@ -3,15 +3,13 @@
 namespace App\Models;
 
 use Abbasudo\Purity\Traits\Filterable;
-use Abbasudo\Purity\Traits\Sortable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Mehradsadeghi\FilterQueryString\FilterQueryString;
 
 class Car extends Model
 {
-    use HasFactory, Filterable;
+    use Filterable, HasFactory;
 
     protected $guarded = [];
 
@@ -28,7 +26,6 @@ class Car extends Model
         'whatsapp_number',
         'city_id',
     ];
-
 
     // protected $filters = ['year', 'brand_name', 'min_price', 'max_price'];
 
@@ -70,7 +67,7 @@ class Car extends Model
      */
     public function getCreatedAtAttribute()
     {
-        return  Carbon::parse($this->attributes['created_at'])->diffForHumans();
+        return Carbon::parse($this->attributes['created_at'])->diffForHumans();
     }
 
     /**
@@ -78,6 +75,6 @@ class Car extends Model
      */
     public function getUpdatedAtAttribute()
     {
-        return  Carbon::parse($this->attributes['updated_at'])->diffForHumans();
+        return Carbon::parse($this->attributes['updated_at'])->diffForHumans();
     }
 }

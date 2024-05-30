@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Showroom extends Model
 {
-    use HasFactory, Filterable;
+    use Filterable, HasFactory;
 
     protected $guarded = [];
 
@@ -42,7 +42,7 @@ class Showroom extends Model
      */
     public function getCreatedAtAttribute()
     {
-        return  Carbon::parse($this->attributes['created_at'])->diffForHumans();
+        return Carbon::parse($this->attributes['created_at'])->diffForHumans();
     }
 
     /**
@@ -50,6 +50,6 @@ class Showroom extends Model
      */
     public function getUpdatedAtAttribute()
     {
-        return  Carbon::parse($this->attributes['updated_at'])->diffForHumans();
+        return Carbon::parse($this->attributes['updated_at'])->diffForHumans();
     }
 }

@@ -25,7 +25,7 @@ class CityController extends Controller
                     'editRoute' => route('cities.edit', $city->id),
                     'deleteRoute' => route('cities.destroy', $city->id),
                     'showRoute' => route('cities.show', $city->id),
-                ])->render()
+                ])->render(),
             ];
         });
 
