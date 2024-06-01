@@ -329,6 +329,11 @@ return [
             'icon' => 'fas fa-fw fa-hand-holding-heart',
         ],
         [
+            'text' => 'Layanan',
+            'url' => 'services',
+            'icon' => 'fas fa-fw fa-users',
+        ],
+        [
             'text' => 'Faq',
             'url' => 'faqs',
             'icon' => 'fas fa-fw fa-address-book',

@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ShowroomController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('carImage', CarImageController::class);
     Route::resource('donations', DonationController::class);
     Route::resource('faqs', FaqController::class);
+    Route::resource('services', ServiceController::class);
 
     Route::get('showrooms/car/create/{id}', [ShowroomController::class, 'createCar'])->name('showrooms.createCar');
     Route::post('showrooms/car/store', [ShowroomController::class, 'storeCar'])->name('showrooms.storeCar');
