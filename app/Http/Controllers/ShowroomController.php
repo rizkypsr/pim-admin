@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\WhatsappFormat;
 use App\Models\Car;
 use App\Models\CarImage;
 use App\Models\City;
@@ -26,7 +27,7 @@ class ShowroomController extends Controller
                 $showroom->id,
                 $showroom->showroom_name,
                 $showroom->video,
-                '<a href="https://wa.me/'.'62'.substr($showroom->whatsapp_number, 1).'" target="_blank">'.$showroom->whatsapp_number.'</a>',
+                WhatsappFormat::formatHtml($showroom->whatsapp_number),
                 $showroom->city->city_name,
                 view('components.action-buttons', [
                     'editRoute' => route('showrooms.edit', $showroom->id),

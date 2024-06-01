@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ServiceType;
+use App\Helpers\WhatsappFormat;
 use App\Models\City;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class ServiceController extends Controller
                 $service->name,
                 $service->city->city_name,
                 $service->address,
-                $service->phone,
+                WhatsappFormat::formatHtml($service->phone),
                 $service->car_description,
                 ServiceType::getStatus($service->status),
                 view('components.action-buttons', $actionViews)->render(),
