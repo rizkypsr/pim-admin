@@ -49,5 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::post('cars/image/store', [CarController::class, 'storeCarImage'])->name('cars.storeImage');
     Route::delete('cars/image/delete/{id}', [CarController::class, 'destroyImage'])->name('cars.destroyImage');
 
+    Route::get('donations/image/create/{id}', [DonationController::class, 'createDonationImage'])->name('donations.createImage');
+    Route::post('donations/image/store', [DonationController::class, 'storeDonationImage'])->name('donations.storeImage');
     Route::delete('donations/image/delete/{id}', [DonationController::class, 'destroyImage'])->name('donations.destroyImage');
 });

@@ -7,6 +7,11 @@
 @stop
 
 @section('content')
+    <div class="mb-3">
+        <a href="{{ route('donations.createImage', $donation->id) }}">
+            <x-adminlte-button label="Tambah Gambar" theme="success" icon="fas fa-plus" />
+        </a>
+    </div>
     <div class="row pb-4">
         <div class="card p-4 col-md-4">
             <div class="row">

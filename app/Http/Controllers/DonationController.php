@@ -242,4 +242,48 @@ class DonationController extends Controller
 
         return redirect()->back()->with('error', 'Gambar Donasi gagal dihapus.');
     }
+
+    public function createDonationImage(string $id)
+    {
+        return view('donations.create_image', compact('id'));
+    }
+
+    public function storeDonationImage(Request $request)
+    {
+        $rules = [
+            'images' => 'required|max:2048',
+            'donation_id' => 'required|exists:donations,id',
+        ];
+
+        $messages = [
+            'images.required' => 'Gambar wajib dipilih.',
+            'images.max' => 'Ukuran gambar maksimal 2MB.',
+            'donation_id.required' => 'Mobil wajib dipilih.',
+            'donation_id.exists' => 'Mobil tidak ditemukan.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $donation = Donation::findOrFail($request->donation_id);
+
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $image) {
+                $imageName = time().'_'.$image->getClientOriginalName();
+                $image->storeAs('donations', $imageName, 'public');
+
+                DonationImage::create([
+                    'donation_id' => $donation->id,
+                    'filename' => $imageName,
+                ]);
+            }
+        }
+
+        return redirect()->route('donations.show', $request->donation_id)->with('success', 'Gambar berhasil ditambahkan.');
+    }
 }
