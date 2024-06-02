@@ -9,8 +9,11 @@
 @section('content')
     <div class="p-4">
         <div class="mb-3">
-            <a href="{{ route('showrooms.createCar', $showroom->id) }}">
+            <a href="{{ route('showrooms.createCar', $showroom->id) }}" class="mr-3">
                 <x-adminlte-button label="Tambah Mobil" theme="success" icon="fas fa-plus" />
+            </a>
+            <a href="{{ route('showrooms.createImage', $showroom->id) }}">
+                <x-adminlte-button label="Tambah Gambar" theme="success" icon="fas fa-plus" />
             </a>
         </div>
 

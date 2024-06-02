@@ -420,4 +420,48 @@ class ShowroomController extends Controller
 
         return redirect()->route('showrooms.show', $request->showroom_id)->with('success', 'Mobil berhasil diubah.');
     }
+
+    public function createShowroomImage(string $id)
+    {
+        return view('showrooms.create_image', compact('id'));
+    }
+
+    public function storeShowroomImage(Request $request)
+    {
+        $rules = [
+            'images' => 'required|max:2048',
+            'showroom_id' => 'required|exists:showrooms,id',
+        ];
+
+        $messages = [
+            'images.required' => 'Gambar wajib dipilih.',
+            'images.max' => 'Ukuran gambar maksimal 2MB.',
+            'showroom_id.required' => 'Mobil wajib dipilih.',
+            'showroom_id.exists' => 'Mobil tidak ditemukan.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $showroom = Showroom::findOrFail($request->showroom_id);
+
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $image) {
+                $imageName = time().'_'.$image->getClientOriginalName();
+                $image->storeAs('showroom', $imageName, 'public');
+
+                ShowroomImage::create([
+                    'showroom_id' => $showroom->id,
+                    'filename' => $imageName,
+                ]);
+            }
+        }
+
+        return redirect()->route('showrooms.show', $request->showroom_id)->with('success', 'Gambar berhasil ditambahkan.');
+    }
 }

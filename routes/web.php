@@ -42,7 +42,11 @@ Route::middleware('auth')->group(function () {
     Route::get('showrooms/car/edit/{id}', [ShowroomController::class, 'editCar'])->name('showrooms.editCar');
     Route::put('showrooms/car/update/{id}', [ShowroomController::class, 'updateCar'])->name('showrooms.updateCar');
     Route::delete('showrooms/image/delete/{id}', [ShowroomController::class, 'destroyImage'])->name('showrooms.destroyImage');
+    Route::get('showrooms/image/create/{id}', [ShowroomController::class, 'createShowroomImage'])->name('showrooms.createImage');
+    Route::post('showrooms/image/store', [ShowroomController::class, 'storeShowroomImage'])->name('showrooms.storeImage');
 
+    Route::get('cars/image/create/{id}', [CarController::class, 'createCarImage'])->name('cars.createImage');
+    Route::post('cars/image/store', [CarController::class, 'storeCarImage'])->name('cars.storeImage');
     Route::delete('cars/image/delete/{id}', [CarController::class, 'destroyImage'])->name('cars.destroyImage');
 
     Route::delete('donations/image/delete/{id}', [DonationController::class, 'destroyImage'])->name('donations.destroyImage');

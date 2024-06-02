@@ -287,4 +287,48 @@ class CarController extends Controller
 
         return redirect()->back()->with('error', 'Gambar Mobil gagal dihapus.');
     }
+
+    public function createCarImage(string $id)
+    {
+        return view('cars.create_image', compact('id'));
+    }
+
+    public function storeCarImage(Request $request)
+    {
+        $rules = [
+            'images' => 'required|max:2048',
+            'car_id' => 'required|exists:cars,id',
+        ];
+
+        $messages = [
+            'images.required' => 'Gambar wajib dipilih.',
+            'images.max' => 'Ukuran gambar maksimal 2MB.',
+            'car_id.required' => 'Mobil wajib dipilih.',
+            'car_id.exists' => 'Mobil tidak ditemukan.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $car = Car::findOrFail($request->car_id);
+
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $image) {
+                $imageName = time().'_'.$image->getClientOriginalName();
+                $image->storeAs('cars', $imageName, 'public');
+
+                CarImage::create([
+                    'car_id' => $car->id,
+                    'filename' => $imageName,
+                ]);
+            }
+        }
+
+        return redirect()->route('cars.show', $request->car_id)->with('success', 'Gambar berhasil ditambahkan.');
+    }
 }
