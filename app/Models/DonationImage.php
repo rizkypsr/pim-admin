@@ -14,9 +14,4 @@ class DonationImage extends Model
     protected $casts = [
         'donation_id' => 'integer',
     ];
-
-    // public function getFilenameAttribute($value)
-    // {
-    //     return config('app.url') . '/storage/donations/' . $value;
-    // }
 }

@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Abbasudo\Purity\Traits\Filterable;
+use Abbasudo\Purity\Traits\Sortable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
 {
-    use Filterable, HasFactory;
+    use Filterable, HasFactory, Sortable;
 
     protected $guarded = [];
 
@@ -25,6 +26,10 @@ class Car extends Model
         'showroom',
         'whatsapp_number',
         'city_id',
+    ];
+
+    protected $sortableFields = [
+        'created_at',
     ];
 
     // protected $filters = ['year', 'brand_name', 'min_price', 'max_price'];

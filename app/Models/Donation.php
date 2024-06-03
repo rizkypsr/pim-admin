@@ -12,7 +12,7 @@ class Donation extends Model
 
     protected $guarded = [];
 
-    public function images()
+    public function donationImages()
     {
         return $this->hasMany(DonationImage::class);
     }

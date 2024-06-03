@@ -32,11 +32,6 @@ class Showroom extends Model
         return $this->hasMany(Car::class);
     }
 
-    // public function getWhatsappNumberAttribute()
-    // {
-    //     return 'https://wa.me/' . '62' . substr($this->attributes['whatsapp_number'], 1);
-    // }
-
     /**
      * @return string
      */
