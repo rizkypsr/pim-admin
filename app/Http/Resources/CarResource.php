@@ -26,7 +26,8 @@ class CarResource extends JsonResource
             'whatsapp_number' => $this->whatsapp_number,
             'whatsapp_url' => WhatsappFormat::format($this->whatsapp_number),
             'showroom' => new ShowroomResource($this->showroom),
-            'city' => new CityResource($this->city),
+            'city' => $this->city ? $this->city->city_name : null,
+            'province' => $this->city ? $this->city->province->province_name : null,
             'images' => CarImageResource::collection($this->carImages),
         ];
     }
