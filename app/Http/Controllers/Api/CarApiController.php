@@ -13,6 +13,7 @@ class CarApiController extends Controller
     {
         try {
             $cars = Car::filter()->sort()->whereNull('showroom_id')->get();
+
             $carsCollection = CarResource::collection($cars);
 
             return ApiResponse::success($carsCollection);
