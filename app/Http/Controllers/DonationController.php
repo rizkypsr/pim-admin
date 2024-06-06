@@ -229,17 +229,20 @@ class DonationController extends Controller
 
     public function destroyImage(string $id)
     {
-        $donationImage = DonationImage::findOrFail($id);
-        $path = 'donations/'.$donationImage->filename;
+        try {
+            $donationImage = DonationImage::findOrFail($id);
+            $path = 'donations/'.$donationImage->filename;
 
-        if (Storage::disk('public')->exists($path)) {
-            Storage::disk('public')->delete($path);
+            if (Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->delete($path);
+            }
 
             $donationImage->delete();
 
+            return redirect()->back()->with('success', 'Gambar berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gambar gagal dihapus.');
         }
-
-        return redirect()->back()->with('success', 'Gambar Donasi berhasil dihapus.');
     }
 
     public function createDonationImage(string $id)

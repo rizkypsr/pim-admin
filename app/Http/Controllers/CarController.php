@@ -273,19 +273,20 @@ class CarController extends Controller
 
     public function destroyImage(string $id)
     {
-        $carImage = CarImage::findOrFail($id);
+        try {
+            $carImage = CarImage::findOrFail($id);
+            $path = 'cars/'.$carImage->filename;
 
-        $path = 'cars/'.$carImage->filename;
-
-        if (Storage::disk('public')->exists($path)) {
-            Storage::disk('public')->delete($path);
+            if (Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->delete($path);
+            }
 
             $carImage->delete();
 
+            return redirect()->back()->with('success', 'Gambar berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gambar gagal dihapus.');
         }
-
-        return redirect()->back()->with('success', 'Gambar Mobil berhasil dihapus.');
-
     }
 
     public function createCarImage(string $id)

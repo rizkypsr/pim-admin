@@ -271,17 +271,20 @@ class ShowroomController extends Controller
 
     public function destroyImage(string $id)
     {
-        $showroomImage = ShowroomImage::findOrFail($id);
+        try {
+            $showroomImage = ShowroomImage::findOrFail($id);
+            $path = 'showroom/'.$showroomImage->filename;
 
-        $path = 'showroom/'.$showroomImage->filename;
+            if (Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->delete($path);
+            }
 
-        if (Storage::disk('public')->exists($path)) {
-
-            Storage::disk('public')->delete($path);
             $showroomImage->delete();
-        }
 
-        return redirect()->back()->with('success', 'Gambar Showroom berhasil dihapus.');
+            return redirect()->back()->with('success', 'Gambar berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gambar gagal dihapus.');
+        }
     }
 
     public function createCar(string $id)
