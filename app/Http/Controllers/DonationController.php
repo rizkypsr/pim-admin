@@ -237,10 +237,9 @@ class DonationController extends Controller
 
             $donationImage->delete();
 
-            return redirect()->back()->with('success', 'Gambar Donasi berhasil dihapus.');
         }
 
-        return redirect()->back()->with('error', 'Gambar Donasi gagal dihapus.');
+        return redirect()->back()->with('success', 'Gambar Donasi berhasil dihapus.');
     }
 
     public function createDonationImage(string $id)

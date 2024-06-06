@@ -282,10 +282,10 @@ class CarController extends Controller
 
             $carImage->delete();
 
-            return redirect()->back()->with('success', 'Gambar Mobil berhasil dihapus.');
         }
 
-        return redirect()->back()->with('error', 'Gambar Mobil gagal dihapus.');
+        return redirect()->back()->with('success', 'Gambar Mobil berhasil dihapus.');
+
     }
 
     public function createCarImage(string $id)

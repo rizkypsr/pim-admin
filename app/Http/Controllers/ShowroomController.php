@@ -276,14 +276,12 @@ class ShowroomController extends Controller
         $path = 'showroom/'.$showroomImage->filename;
 
         if (Storage::disk('public')->exists($path)) {
+
             Storage::disk('public')->delete($path);
-
             $showroomImage->delete();
-
-            return redirect()->back()->with('success', 'Gambar Showroom berhasil dihapus.');
         }
 
-        return redirect()->back()->with('error', 'Gambar Showroom gagal dihapus.');
+        return redirect()->back()->with('success', 'Gambar Showroom berhasil dihapus.');
     }
 
     public function createCar(string $id)
