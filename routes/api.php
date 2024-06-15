@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CarApiController;
 use App\Http\Controllers\Api\CityApiController;
 use App\Http\Controllers\Api\DonationApiController;
 use App\Http\Controllers\Api\ProvinceApiController;
+use App\Http\Controllers\Api\ServiceApiController;
 use App\Http\Controllers\Api\ShowroomApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,3 +40,5 @@ Route::get('/car/showroom/{id}', [CarApiController::class, 'getCarByShowroomId']
 
 Route::get('/donations', [DonationApiController::class, 'getAllDonations']);
 Route::get('/donation/{id}', [DonationApiController::class, 'getDonationById']);
+
+Route::post('/service', [ServiceApiController::class, 'store']);
