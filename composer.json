@@ -11,6 +11,7 @@
         "php": "^8.1",
         "abbasudo/laravel-purity": "^3.3",
         "afrizalmy/laraindo": "^1.0",
+        "arielmejiadev/larapex-charts": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "jeroennoten/laravel-adminlte": "^3.11",
         "laravel/framework": "^10.10",
@@ -18,6 +19,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.5",
+        "laraveldaily/laravel-charts": "^0.2.3",
         "mehradsadeghi/laravel-filter-querystring": "^1.1",
         "yoeunes/toastr": "^2.3"
     },
