@@ -16,6 +16,8 @@ class ServiceType
                 return 'Jual Mobil';
             case 'inspection':
                 return 'Inspeksi Mobil';
+            case 'consultation':
+                return 'Konsultasi Mobil';
             default:
                 throw new \Exception('Jenis layanan tidak valid');
         }

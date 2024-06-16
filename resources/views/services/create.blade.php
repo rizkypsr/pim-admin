@@ -18,6 +18,7 @@
                         <option value="service">Service</option>
                         <option value="sale">Jual Mobil</option>
                         <option value="inspection">Inspeksi Mobil</option>
+                        <option value="consultation">Konsultasi Mobil</option>
                     </x-adminlte-select2>
                     <x-adminlte-input name="name" label="Nama" placeholder="Nama" fgroup-class="col-md-3"
                         enable-old-support value="{{ old('name') }}" />
