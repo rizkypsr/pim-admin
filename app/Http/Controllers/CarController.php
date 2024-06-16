@@ -15,9 +15,22 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::with(['showroom', 'city'])->whereNull('showroom_id')->filter()->get();
+
+        $params = [
+            'price' => [
+                '$gte' => $request->min_price,
+                '$lte' => $request->max_price,
+            ],
+            'brand_name' => ['$contains' => $request->brand_name],
+        ];
+
+        if ($request->year) {
+            $params['year'] = ['$eq' => $request->year];
+        }
+
+        $cars = Car::with(['showroom', 'city'])->whereNull('showroom_id')->filter($params)->get();
 
         $data = $cars->map(function ($car) {
             return [

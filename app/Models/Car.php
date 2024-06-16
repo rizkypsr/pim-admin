@@ -32,26 +32,6 @@ class Car extends Model
         'created_at',
     ];
 
-    // protected $filters = ['year', 'brand_name', 'min_price', 'max_price'];
-
-    // public function min_price($query, $value)
-    // {
-    //     if ($value) {
-    //         return $query->where('price', '>=', $value);
-    //     }
-
-    //     return $query;
-    // }
-
-    // public function max_price($query, $value)
-    // {
-    //     if ($value) {
-    //         return $query->where('price', '<=', $value);
-    //     }
-
-    //     return $query;
-    // }
-
     public function city()
     {
         return $this->belongsTo(City::class);
