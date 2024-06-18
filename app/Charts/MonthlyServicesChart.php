@@ -15,9 +15,8 @@ class MonthlyServicesChart
         $this->chart = $chart;
     }
 
-    public function build(): \ArielMejiaDev\LarapexCharts\BarChart
+    public function build($month): \ArielMejiaDev\LarapexCharts\BarChart
     {
-
         $currentYear = Carbon::now()->year;
 
         $allMonths = [
@@ -91,13 +90,13 @@ class MonthlyServicesChart
         });
 
         return $this->chart->barChart()
-            ->setTitle('Layanan')
+            ->setTitle('Total Layanan Tiap Bulan')
             ->setSubtitle('Tahun '.$currentYear)
             ->addData('Layanan Cari Mobil', $findCarData->toArray())
             ->addData('Layanan Jual Mobil', $saleData->toArray())
-            ->addData('Layanan Service Mobil', $serviceData->toArray())
+            ->addData('Layanan Servis Mobil', $serviceData->toArray())
             ->addData('Layanan Inspeksi Mobil', $inspectionData->toArray())
             ->addData('Layanan Konsultasi Mobil', $consultationData->toArray())
-            ->setLabels(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+            ->setXAxis(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
     }
 }
