@@ -61,7 +61,7 @@
 
                 <div class="container-fluid bg-light p-3 border">
                     <x-adminlte-datatable id="carTable" :heads="$heads" head-theme="dark" :config="$config" striped
-                        hoverable bordered />
+                        hoverable bordered with-buttons />
                 </div>
             </div>
             <div class="bg-light p-3 border col-md-5">
