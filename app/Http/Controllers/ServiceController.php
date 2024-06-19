@@ -36,6 +36,8 @@ class ServiceController extends Controller
                 WhatsappFormat::formatHtml($service->phone),
                 $service->car_description,
                 ServiceType::getStatus($service->status),
+                $service->created_at->format('d-m-Y H:i:s'),
+                $service->updated_at->format('d-m-Y H:i:s'),
                 view('components.action-buttons', $actionViews)->render(),
             ];
         });
@@ -52,6 +54,8 @@ class ServiceController extends Controller
                 ['orderable' => false],
                 null,
                 null,
+                null,
+                null,
             ],
         ];
 
@@ -64,6 +68,8 @@ class ServiceController extends Controller
             ['label' => 'No Hp', 'width' => 10],
             ['label' => 'Deskripsi Mobil', 'width' => 40],
             ['label' => 'Status', 'width' => 10],
+            ['label' => 'Tanggal Buat', 'width' => 10],
+            ['label' => 'Tanggal Ubah', 'width' => 10],
             ['label' => 'Actions', 'no-export' => true, 'width' => 5],
         ];
 
