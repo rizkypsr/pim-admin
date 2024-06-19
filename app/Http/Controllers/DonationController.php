@@ -124,9 +124,9 @@ class DonationController extends Controller
      */
     public function show(string $id)
     {
-        $donation = Donation::with('images')->findOrFail($id);
+        $donation = Donation::with('donationImages')->findOrFail($id);
 
-        $data = $donation->images->map(function ($image) {
+        $data = $donation->donationImages->map(function ($image) {
             $path = Storage::url('donations/'.$image->filename);
 
             return [
@@ -214,7 +214,7 @@ class DonationController extends Controller
     {
         $donation = Donation::with('images')->findOrFail($id);
 
-        foreach ($donation->images as $donationImage) {
+        foreach ($donation->donationImages as $donationImage) {
             $path = 'donations/'.$donationImage->filename;
 
             if (Storage::disk('public')->exists($path)) {
