@@ -55,18 +55,12 @@
 
         <hr>
 
-        <div class="row">
-            <div class="col-md-7">
-                <h2>Daftar Mobil pada Showroom {{ $showroom->showroom_name }}</h2>
+        <div>
+            <h2>Daftar Mobil pada Showroom {{ $showroom->showroom_name }}</h2>
 
-                <div class="container-fluid bg-light p-3 border">
-                    <x-adminlte-datatable id="carTable" :heads="$heads" head-theme="dark" :config="$config" striped
-                        hoverable bordered with-buttons />
-                </div>
-            </div>
-            <div class="bg-light p-3 border col-md-5">
-                <x-adminlte-datatable id="table2" :heads="$headsImage" head-theme="dark" :config="$configImage" striped hoverable
-                    bordered />
+            <div class="container-fluid bg-light p-3 border">
+                <x-adminlte-datatable id="carTable" :heads="$heads" head-theme="dark" :config="$config" striped hoverable
+                    bordered with-buttons />
             </div>
         </div>
     </div>

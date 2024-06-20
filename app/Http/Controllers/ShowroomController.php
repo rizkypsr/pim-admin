@@ -125,11 +125,12 @@ class ShowroomController extends Controller
     {
         $showroom = Showroom::with('city', 'showroomImages', 'cars')->findOrFail($id);
 
-        $data = $showroom->cars->map(function ($car) {
+        $data = $showroom->cars->map(function ($car) use ($showroom) {
             return [
                 $car->id,
                 $car->car_name,
                 $car->brand_name,
+                $showroom->showroom_name,
                 RupiahFormat::currency($car->price),
                 $car->year,
                 $car->whatsapp_number ?? '-',
@@ -151,6 +152,7 @@ class ShowroomController extends Controller
                 null,
                 null,
                 null,
+                null,
                 ['orderable' => false],
                 ['orderable' => false],
                 ['orderable' => false],
@@ -161,6 +163,7 @@ class ShowroomController extends Controller
             ['label' => 'ID', 'width' => 3],
             ['label' => 'Nama Mobil', 'width' => 20],
             ['label' => 'Merk Mobil', 'width' => 15],
+            ['label' => 'Showroom', 'width' => 10],
             ['label' => 'Harga', 'width' => 20],
             ['label' => 'Tahun', 'width' => 10],
             ['label' => 'Nomor WA', 'width' => 10],
@@ -168,35 +171,7 @@ class ShowroomController extends Controller
             ['label' => 'Actions', 'no-export' => true, 'width' => 5],
         ];
 
-        $dataImage = $showroom->showroomImages->map(function ($showroom) {
-            $path = Storage::url('showroom/'.$showroom->filename);
-
-            return [
-                $showroom->id,
-                '<img src="'.$path.'" alt="Gambar Showroom" class="img-thumbnail" style="width: 100px;">',
-                view('components.only-delete-button', [
-                    'deleteRoute' => route('showrooms.destroyImage', $showroom->id),
-                ])->render(),
-            ];
-        });
-
-        $configImage = [
-            'data' => $dataImage,
-            'searching' => false,
-            'columns' => [
-                null,
-                ['orderable' => false],
-                ['orderable' => false],
-            ],
-        ];
-
-        $headsImage = [
-            ['label' => 'ID', 'width' => 1],
-            ['label' => 'Gambar', 'width' => 20],
-            ['label' => 'Actions', 'no-export' => true, 'width' => 1],
-        ];
-
-        return view('showrooms.show', compact('showroom', 'heads', 'config', 'headsImage', 'configImage'));
+        return view('showrooms.show', compact('showroom', 'heads', 'config'));
     }
 
     /**
@@ -424,7 +399,38 @@ class ShowroomController extends Controller
 
     public function createShowroomImage(string $id)
     {
-        return view('showrooms.create_image', compact('id'));
+
+        $showroomImages = ShowroomImage::where('showroom_id', $id)->get();
+
+        $dataImage = $showroomImages->map(function ($showroom) {
+            $path = Storage::url('showroom/'.$showroom->filename);
+
+            return [
+                $showroom->id,
+                '<img src="'.$path.'" alt="Gambar Showroom" class="img-thumbnail" style="width: 100px;">',
+                view('components.only-delete-button', [
+                    'deleteRoute' => route('showrooms.destroyImage', $showroom->id),
+                ])->render(),
+            ];
+        });
+
+        $configImage = [
+            'data' => $dataImage,
+            'searching' => false,
+            'columns' => [
+                null,
+                ['orderable' => false],
+                ['orderable' => false],
+            ],
+        ];
+
+        $headsImage = [
+            ['label' => 'ID', 'width' => 1],
+            ['label' => 'Gambar', 'width' => 20],
+            ['label' => 'Actions', 'no-export' => true, 'width' => 1],
+        ];
+
+        return view('showrooms.create_image', compact('id', 'headsImage', 'configImage'));
     }
 
     public function storeShowroomImage(Request $request)

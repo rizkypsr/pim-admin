@@ -33,4 +33,8 @@
             </div>
         </form>
     </div>
+    <div class="bg-light p-3 border">
+        <x-adminlte-datatable id="table2" :heads="$headsImage" head-theme="dark" :config="$configImage" striped hoverable
+            bordered />
+    </div>
 @stop
