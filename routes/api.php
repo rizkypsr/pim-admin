@@ -42,3 +42,7 @@ Route::get('/donations', [DonationApiController::class, 'getAllDonations']);
 Route::get('/donation/{id}', [DonationApiController::class, 'getDonationById']);
 
 Route::post('/service', [ServiceApiController::class, 'store']);
+
+Route::get('/test', function () {
+    return response()->json(['message' => 'Test successful']);
+});
