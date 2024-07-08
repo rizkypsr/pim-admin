@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ShowroomController;
 use Illuminate\Support\Facades\Route;
@@ -52,4 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::get('donations/image/create/{id}', [DonationController::class, 'createDonationImage'])->name('donations.createImage');
     Route::post('donations/image/store', [DonationController::class, 'storeDonationImage'])->name('donations.storeImage');
     Route::delete('donations/image/delete/{id}', [DonationController::class, 'destroyImage'])->name('donations.destroyImage');
+
+    Route::get('/notification', [PushNotificationController::class, 'index'])->name('notification.index');
+    Route::post('/send-notification', [PushNotificationController::class, 'sendPushNotification'])->name('notification.send');
 });

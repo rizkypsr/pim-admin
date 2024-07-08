@@ -20,6 +20,7 @@ class Car extends Model
     ];
 
     protected $filterFields = [
+        'car_name',
         'brand_name',
         'year',
         'price',

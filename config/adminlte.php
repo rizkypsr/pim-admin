@@ -338,6 +338,11 @@ return [
             'url' => 'faqs',
             'icon' => 'fas fa-fw fa-address-book',
         ],
+        [
+            'text' => 'Notifikasi',
+            'url' => 'notification',
+            'icon' => 'fas fa-fw fa-bell',
+        ],
     ],
 
     /*
