@@ -22,11 +22,11 @@ use Illuminate\Support\Facades\Route;
 
 // wrap the route with a auth:sanctum middleware
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
-});
+// Route::middleware('auth:sanctum')->group(function () {
+//     Route::get('/user', function (Request $request) {
+//         return $request->user();
+//     });
+// });
 
 Route::get('/provinces', [ProvinceApiController::class, 'getAllProvinces']);
 Route::get('/cities', [CityApiController::class, 'getAllCities']);
