@@ -9,6 +9,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ShareCarController;
 use App\Http\Controllers\ShowroomController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('faqs', FaqController::class);
     Route::resource('services', ServiceController::class);
 
+    Route::post('/cars/{id}/update-share', [CarController::class, 'updateShare'])->name('cars.updateShare');
+
     Route::get('showrooms/car/create/{id}', [ShowroomController::class, 'createCar'])->name('showrooms.createCar');
     Route::post('showrooms/car/store', [ShowroomController::class, 'storeCar'])->name('showrooms.storeCar');
     Route::get('showrooms/car/edit/{id}', [ShowroomController::class, 'editCar'])->name('showrooms.editCar');
@@ -57,3 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/notification', [PushNotificationController::class, 'index'])->name('notification.index');
     Route::post('/send-notification', [PushNotificationController::class, 'sendPushNotification'])->name('notification.send');
 });
+
+Route::get('/share/encrypt', [ShareCarController::class, 'encrypt'])->name('share.encrypt');
+Route::get('/share', [ShareCarController::class, 'index'])->name('share.index');
+Route::get('/share/show/{id}', [ShareCarController::class, 'show'])->name('share.show');

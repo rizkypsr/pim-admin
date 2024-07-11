@@ -193,7 +193,7 @@ return [
     'classes_body' => '',
     'classes_brand' => '',
     'classes_brand_text' => '',
-    'classes_content_wrapper' => '',
+    'classes_content_wrapper' => 'pb-4',
     'classes_content_header' => '',
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
@@ -517,6 +517,23 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js',
+                ],
+            ],
+        ],
+        'BootstrapSwitch' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'defer' => true,
+                    'location' => 'https://cdn.jsdelivr.net/npm/bootstrap-switch@3.4.0/dist/css/bootstrap3/bootstrap-switch.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    // 'location' => 'vendor/bootstrap-switch/js/bootstrap-switch.min.js',
+                    'location' => 'https://cdn.jsdelivr.net/npm/bootstrap-switch@3.4.0/dist/js/bootstrap-switch.min.js',
                 ],
             ],
         ],

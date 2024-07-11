@@ -38,6 +38,12 @@
                         @endforeach
                     </x-adminlte-select2>
                 </div>
+                <div class="row">
+                    <x-adminlte-textarea label="Deskripsi" name="description" placeholder="Masukan deskripsi..."
+                        fgroup-class="col-md-12" enable-old-support>
+                        {{ $car->description }}
+                    </x-adminlte-textarea>
+                </div>
             </div>
             <div class="card-footer">
                 <x-adminlte-button type="submit" label="Simpan" theme="primary" />
