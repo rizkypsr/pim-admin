@@ -23,11 +23,16 @@ class CarController extends Controller
                 '$gte' => $request->min_price,
                 '$lte' => $request->max_price,
             ],
+            'car_name' => ['$contains' => $request->car_name],
             'brand_name' => ['$contains' => $request->brand_name],
         ];
 
         if ($request->year) {
             $params['year'] = ['$eq' => $request->year];
+        }
+
+        if ($request->city_id) {
+            $params['city_id'] = ['$eq' => $request->city_id];
         }
 
         $cars = Car::with(['showroom', 'city'])->whereNull('showroom_id')->filter($params)->get();
@@ -37,11 +42,16 @@ class CarController extends Controller
                 $car->id,
                 $car->car_name,
                 $car->brand_name,
+                $car->description,
                 RupiahFormat::currency($car->price),
                 $car->year,
                 $car->whatsapp_number ?? '-',
                 $car->city->city_name ?? '-',
                 '<a href="'.$car->video.'" target="_blank">'.$car->video.'</a>',
+                view('components.switch-button', [
+                    'carId' => $car->id,
+                    'share' => $car->share,
+                ])->render(),
                 view('components.action-buttons', [
                     'editRoute' => route('cars.edit', $car->id),
                     'deleteRoute' => route('cars.destroy', $car->id),
@@ -58,26 +68,32 @@ class CarController extends Controller
                 null,
                 null,
                 null,
+                null,
                 ['orderable' => false],
                 null,
+                ['orderable' => false],
                 ['orderable' => false],
                 ['orderable' => false],
             ],
         ];
 
         $heads = [
-            ['label' => 'ID', 'width' => 3],
-            ['label' => 'Nama Mobil', 'width' => 20],
-            ['label' => 'Merk Mobil', 'width' => 15],
-            ['label' => 'Harga', 'width' => 20],
-            ['label' => 'Tahun', 'width' => 10],
-            ['label' => 'Nomor WA', 'width' => 10],
-            ['label' => 'Kota', 'width' => 10],
-            ['label' => 'Link Video', 'width' => 5],
-            ['label' => 'Actions', 'no-export' => true, 'width' => 5],
+            ['label' => 'ID'],
+            ['label' => 'Nama Mobil', 'width' => '12'],
+            ['label' => 'Merk Mobil', 'width' => '12'],
+            ['label' => 'Deskripsi', 'width' => '20'],
+            ['label' => 'Harga', 'width' => '15'],
+            ['label' => 'Tahun'],
+            ['label' => 'Nomor WA'],
+            ['label' => 'Kota'],
+            ['label' => 'Link Video'],
+            ['label' => 'Share', 'no-export' => true],
+            ['label' => 'Actions', 'no-export' => true],
         ];
 
-        return view('cars.index', compact('heads', 'config'));
+        $cities = City::all();
+
+        return view('cars.index', compact('heads', 'config', 'cities'));
     }
 
     /**
@@ -219,6 +235,7 @@ class CarController extends Controller
         $rules = [
             'car_name' => 'required|string|max:255',
             'brand_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             'price' => 'required|numeric',
             'video' => 'required|string|max:255',
             'year' => 'required|numeric|digits:4',
@@ -230,6 +247,7 @@ class CarController extends Controller
         $messages = [
             'string' => 'Input harus berupa text.',
             'max' => 'Input maksimal :max karakter.',
+            'description.required' => 'Deskripsi wajib diisi.',
             'car_name.required' => 'Nama Mobil wajib diisi.',
             'brand_name.required' => 'Merk Mobil wajib diisi.',
             'price.required' => 'Harga wajib diisi.',
@@ -253,6 +271,7 @@ class CarController extends Controller
         $car->update([
             'car_name' => $request->car_name,
             'brand_name' => $request->brand_name,
+            'description' => $request->description,
             'price' => $request->price,
             'video' => $request->video,
             'year' => $request->year,
@@ -344,5 +363,21 @@ class CarController extends Controller
         }
 
         return redirect()->route('cars.show', $request->car_id)->with('success', 'Gambar berhasil ditambahkan.');
+    }
+
+    public function updateShare(Request $request, string $id)
+    {
+
+        try {
+            $car = Car::findOrFail($id);
+            $car->update([
+                'share' => $request->share,
+            ]);
+
+            return redirect()->back()->with('success', 'Share berhasil diperbarui.');
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            // Handle the case where the car is not found
+            return redirect()->back()->with('error', 'Mobil tidak ditemukan.');
+        }
     }
 }
