@@ -42,13 +42,11 @@ class CarApiController extends Controller
     public function getCarByShowroomId($id)
     {
         try {
-            $car = Car::with(['showroom', 'carImages'])->where('showroom_id', $id)->get();
+            $cars = Car::with(['showroom', 'carImages'])->where('showroom_id', $id)->filter()->sort()->get();
 
-            if (! $car) {
-                return ApiResponse::error('Not Found', 404, 'Data mobil tidak ditemukan.');
-            }
+            $carsCollection = CarResource::collection($cars);
 
-            return ApiResponse::success($car);
+            return ApiResponse::success($carsCollection);
         } catch (\Exception $e) {
             return ApiResponse::error('Internal Server Error', 500, 'Terjadi kesalahan pada server saat mengambil data mobil.');
         }
