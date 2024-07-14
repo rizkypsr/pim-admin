@@ -12,7 +12,8 @@ class ShowroomApiController extends Controller
     public function getAllShowrooms()
     {
         try {
-            $showrooms = Showroom::all();
+            $showrooms = Showroom::filter()->sort()->get();
+
             $showroomsCollection = ShowroomResource::collection($showrooms);
 
             return ApiResponse::success($showroomsCollection);

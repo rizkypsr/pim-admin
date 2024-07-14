@@ -3,18 +3,27 @@
 namespace App\Models;
 
 use Abbasudo\Purity\Traits\Filterable;
+use Abbasudo\Purity\Traits\Sortable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Showroom extends Model
 {
-    use Filterable, HasFactory;
+    use Filterable, HasFactory, Sortable;
 
     protected $guarded = [];
 
     protected $casts = [
         'city_id' => 'integer',
+    ];
+
+    protected $filterFields = [
+        'showroom_name',
+    ];
+
+    protected $sortableFields = [
+        'created_at',
     ];
 
     public function city()
