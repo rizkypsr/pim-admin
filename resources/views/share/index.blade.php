@@ -11,23 +11,19 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Pusat Info Mobil</title>
-
-    <script>
-        let text = {{ $shortURL }}
-        const copyContent = async () => {
-            try {
-                await navigator.clipboard.writeText(text);
-                console.log('Content copied to clipboard');
-            } catch (err) {
-                console.error('Failed to copy: ', err);
-            }
-        }
-    </script>
 </head>
 
 <body>
     <div class="container my-5">
-        <button class="btn btn-secondary mb-4" onclick="copyContent()">Copy Link</button>
+
+        <div class="input-group mb-3">
+            <input id="copyText" type="text" class="form-control" aria-label="Share Link"
+                aria-describedby="button-share" value="{{ $shortURL }}" readonly>
+            <button id="btn-clipboard" class="btn btn-outline-secondary btn-clipboard" type="button" id="button-share"
+                data-clipboard-target="#copyText" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-trigger="manual" title="Link berhasil disalin!">Share Link</button>
+        </div>
+
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @if ($cars->isEmpty())
                 <div class="col-md-6 col-lg-4">
@@ -72,9 +68,39 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(
+                tooltipTriggerEl))
+
+
+            var clipboard = new ClipboardJS('.btn-clipboard');
+
+            clipboard.on('success', function(e) {
+                // Show the tooltip after successful copy
+                var tooltip = bootstrap.Tooltip.getInstance(e.trigger);
+
+                tooltip.show();
+
+                setTimeout(function() {
+                    tooltip.hide();
+                }, 1500);
+            });
+
+            clipboard.on('error', function(e) {
+                console.log(e);
+            });
+        });
     </script>
 </body>
 
