@@ -30,7 +30,9 @@ class ShareCarController extends Controller
 
         $faq = Faq::where('name', 'wa')->first();
 
-        $shortURLObject = app(Builder::class)->destinationUrl($request->fullUrl())->make();
+        dump(request()->fullUrl());
+
+        $shortURLObject = app(Builder::class)->destinationUrl(request()->fullUrl())->make();
         $shortURL = $shortURLObject->default_short_url;
 
         return view('share.index', compact('cars', 'faq', 'shortURL'));
