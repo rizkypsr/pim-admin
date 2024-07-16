@@ -30,7 +30,7 @@ class ShareCarController extends Controller
 
         $faq = Faq::where('name', 'wa')->first();
 
-        dump(request()->fullUrl());
+        dd(request()->fullUrl());
 
         $shortURLObject = app(Builder::class)->destinationUrl(request()->fullUrl())->make();
         $shortURL = $shortURLObject->default_short_url;
