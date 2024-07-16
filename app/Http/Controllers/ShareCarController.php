@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\Faq;
+use AshAllenDesign\ShortURL\Classes\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -29,7 +30,10 @@ class ShareCarController extends Controller
 
         $faq = Faq::where('name', 'wa')->first();
 
-        return view('share.index', compact('cars', 'faq'));
+        $shortURLObject = app(Builder::class)->destinationUrl($request->fullUrl())->make();
+        $shortURL = $shortURLObject->default_short_url;
+
+        return view('share.index', compact('cars', 'faq', 'shortURL'));
     }
 
     public function encrypt(Request $request)
@@ -39,6 +43,7 @@ class ShareCarController extends Controller
                 '$gte' => $request->min_price,
                 '$lte' => $request->max_price,
             ],
+            'car_name' => ['$contains' => $request->car_name],
             'brand_name' => ['$contains' => $request->brand_name],
         ];
 
@@ -46,7 +51,9 @@ class ShareCarController extends Controller
             $params['year'] = ['$eq' => $request->year];
         }
 
-        $cars = Car::with(['city', 'carImages'])->where('share', 1)->filter($params)->get();
+        if ($request->city_id) {
+            $params['city_id'] = ['$eq' => $request->city_id];
+        }
 
         $encryptedParams = Crypt::encryptString(json_encode($params));
         $encodedParams = base64_encode($encryptedParams);
