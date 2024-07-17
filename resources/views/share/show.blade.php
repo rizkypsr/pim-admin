@@ -37,7 +37,8 @@
                             @foreach ($car->carImages as $key => $image)
                                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                                     <img src="{{ Storage::url('cars/' . $image->filename) }}"
-                                        class="d-block w-100 img-fluid" alt="Mobil" style="height: 400px;">
+                                        class="d-block w-100 img-fluid" alt="Mobil"
+                                        style="height: 110%; width: auto; object-fit: cover;">
                                 </div>
                             @endforeach
                         </div>
@@ -54,12 +55,14 @@
                     </div>
 
                     <div class="w-100">
-                        <div class="d-flex justify-content-between align-items-baseline m-0">
-                            <h2 class="mt-3 text-center m-0">{{ $car->car_name }} ({{ $car->year }})</h2>
-                            <h4 class="fw-bold text-center m-0">@rupiah($car->price)</h4>
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-baseline">
+                            <h4 class="order-1 order-md-2 fw-bold mt-3">@rupiah($car->price)</h4>
+                            <div class="order-2 order-md-1">
+                                <h2 class="m-0">{{ $car->car_name }} ({{ $car->year }})</h2>
+                                <p class="fw-bold">{{ $car->brand_name }} - Kota {{ $car->city->city_name }}</p>
+                            </div>
                         </div>
-                        <p class="mt-0 mb-4 fw-bold fs-5">{{ $car->brand_name }} - Kota {{ $car->city->city_name }}
-                        </p>
+
                         <div>
                             <p class="m-0 mb-2 fw-bold">Deskripsi</p>
                             <p>{{ $car->description }}</p>
