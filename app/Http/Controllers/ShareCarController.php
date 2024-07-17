@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Models\Faq;
 use AshAllenDesign\ShortURL\Classes\Builder;
+use AshAllenDesign\ShortURL\Facades\ShortURL;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -30,7 +31,9 @@ class ShareCarController extends Controller
 
         $faq = Faq::where('name', 'wa')->first();
 
-        $shortURLObject = app(Builder::class)->destinationUrl(request()->fullUrl())->make();
+        $shortURLObject = ShortURL::destinationUrl(request()->fullUrl())->make();
+
+        // $shortURLObject = app(Builder::class)->destinationUrl(request()->fullUrl())->make();
         $shortURL = $shortURLObject->default_short_url;
 
         return view('share.index', compact('cars', 'faq', 'shortURL'));
