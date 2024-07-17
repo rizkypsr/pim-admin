@@ -43,8 +43,10 @@
                 </x-adminlte-input>
             </div>
             <div class="col-md-3">
-                <x-adminlte-input name="year" type="number" label="Tahun" placeholder="Tahun" igroup-size="sm"
-                    value="{{ request('year') }}" />
+                <x-adminlte-input name="from_year" type="number" label="Tahun" placeholder="Dari Tahun" igroup-size="sm"
+                    value="{{ request('from_year') }}" />
+                <x-adminlte-input name="to_year" type="number" placeholder="Ke Tahun" igroup-size="sm"
+                    value="{{ request('to_year') }}" />
             </div>
             <div class="col-md-3">
                 <x-adminlte-input name="brand_name" label="Merk" placeholder="Merk Mobil" igroup-size="sm"

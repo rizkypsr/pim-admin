@@ -53,8 +53,11 @@ class ShareCarController extends Controller
             'brand_name' => ['$contains' => $request->brand_name],
         ];
 
-        if ($request->year) {
-            $params['year'] = ['$eq' => $request->year];
+        if ($request->from_year || $request->to_year) {
+            $params['year'] = [
+                '$gte' => $request->from_year,
+                '$lte' => $request->to_year,
+            ];
         }
 
         if ($request->city_id) {
