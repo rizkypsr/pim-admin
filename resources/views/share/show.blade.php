@@ -58,7 +58,7 @@
                         <div class="d-flex flex-column flex-md-row justify-content-between align-items-baseline">
                             <h4 class="order-1 order-md-2 fw-bold mt-3">@rupiah($car->price)</h4>
                             <div class="order-2 order-md-1">
-                                <h2 class="m-0">{{ $car->car_name }} ({{ $car->year }})</h2>
+                                <h3 class="m-0">{{ $car->car_name }} ({{ $car->year }})</h3>
                                 <p class="fw-bold">{{ $car->brand_name }} - Kota {{ $car->city->city_name }}</p>
                             </div>
                         </div>
