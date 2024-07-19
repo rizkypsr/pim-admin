@@ -117,7 +117,7 @@ class CarController extends Controller
         $rules = [
             'car_name' => 'required|string|max:255',
             'brand_name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string|max:1024',
             'price' => 'required|numeric',
             'video' => 'required|string|max:255',
             'year' => 'required|numeric|digits:4',
@@ -238,7 +238,7 @@ class CarController extends Controller
         $rules = [
             'car_name' => 'required|string|max:255',
             'brand_name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string|max:1024',
             'price' => 'required|numeric',
             'video' => 'required|string|max:255',
             'year' => 'required|numeric|digits:4',
