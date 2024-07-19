@@ -36,9 +36,8 @@
                         <div class="carousel-inner">
                             @foreach ($car->carImages as $key => $image)
                                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                    <img src="{{ Storage::url('cars/' . $image->filename) }}"
-                                        class="d-block w-100 img-fluid" alt="Mobil"
-                                        style="height: 110%; width: auto; object-fit: cover;">
+                                    <img src="{{ Storage::url('cars/' . $image->filename) }}" class="d-block w-100"
+                                        alt="Mobil" style="height: 30rem; object-fit: cover;">
                                 </div>
                             @endforeach
                         </div>
