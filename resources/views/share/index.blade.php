@@ -39,7 +39,8 @@
                         <div class="card h-100">
                             @if ($car->carImages->isNotEmpty())
                                 <img src="{{ Storage::url('cars/' . $car->carImages->first()->filename) }}"
-                                    class="card-img-top" alt="Car Name">
+                                    class="d-block w-100 img-fluid" alt="Mobil"
+                                    style="height: 110%; width: auto; object-fit: cover;">
                             @else
                                 <img src="https://placehold.co/600x400" class="card-img-top" alt="Car Name">
                             @endif
