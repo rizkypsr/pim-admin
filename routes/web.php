@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('showrooms/image/delete/{id}', [ShowroomController::class, 'destroyImage'])->name('showrooms.destroyImage');
     Route::get('showrooms/image/create/{id}', [ShowroomController::class, 'createShowroomImage'])->name('showrooms.createImage');
     Route::post('showrooms/image/store', [ShowroomController::class, 'storeShowroomImage'])->name('showrooms.storeImage');
+    Route::get('showroom/export', [ShowroomController::class, 'export'])->name('showrooms.export');
 
     Route::get('cars/image/create/{id}', [CarController::class, 'createCarImage'])->name('cars.createImage');
     Route::post('cars/image/store', [CarController::class, 'storeCarImage'])->name('cars.storeImage');

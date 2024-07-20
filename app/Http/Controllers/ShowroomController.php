@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ShowroomCarExport;
 use App\Helpers\WhatsappFormat;
 use App\Models\Car;
 use App\Models\CarImage;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Laraindo\RupiahFormat;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ShowroomController extends Controller
 {
@@ -470,5 +472,10 @@ class ShowroomController extends Controller
         }
 
         return redirect()->route('showrooms.show', $request->showroom_id)->with('success', 'Gambar berhasil ditambahkan.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ShowroomCarExport, 'Daftar Mobil Showroom.xlsx');
     }
 }

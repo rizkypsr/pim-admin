@@ -23,6 +23,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.5",
         "laraveldaily/laravel-charts": "^0.2.3",
+        "maatwebsite/excel": "^3.1",
         "mehradsadeghi/laravel-filter-querystring": "^1.1",
         "yoeunes/toastr": "^2.3",
         "yorcreative/laravel-urlshortener": "^2.1"
