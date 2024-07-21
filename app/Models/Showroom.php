@@ -20,6 +20,7 @@ class Showroom extends Model
 
     protected $filterFields = [
         'showroom_name',
+        'city_id',
     ];
 
     protected $sortableFields = [
