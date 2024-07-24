@@ -26,10 +26,9 @@
 
                 <div class="row">
                     <x-adminlte-input type="number" name="whatsapp_number" label="Nomor WA" placeholder="ex. 089884..."
-                        fgroup-class="col-md-4" enable-old-support value="{{ $car->whatsapp_number }}" />
-                    <x-adminlte-input name="video" label="Link Video" placeholder="Link Video" fgroup-class="col-md-4"
-                        enable-old-support value="{{ $car->video }}" />
-                    <x-adminlte-select2 name="city_id" label="Kota" fgroup-class="col-md-4" enable-old-support>
+                        fgroup-class="col-md-6" enable-old-support value="{{ $car->whatsapp_number }}" />
+
+                    <x-adminlte-select2 name="city_id" label="Kota" fgroup-class="col-md-6" enable-old-support>
                         <option value="" disabled>Pilih Kota</option>
                         @foreach ($cities as $city)
                             <option value="{{ $city->id }}" {{ $city->id == $car->city_id ? 'selected' : '' }}>
@@ -37,6 +36,12 @@
                             </option>
                         @endforeach
                     </x-adminlte-select2>
+                </div>
+                <div class="row">
+                    <x-adminlte-input name="video" label="Link Video" placeholder="Link Video" fgroup-class="col-md-6"
+                        enable-old-support value="{{ $car->video }}" />
+                    <x-adminlte-input name="general_video" label="General Video" placeholder="General Video"
+                        fgroup-class="col-md-6" enable-old-support value="{{ $car->general_video }}" />
                 </div>
                 <div class="row">
                     <x-adminlte-textarea label="Deskripsi" name="description" placeholder="Masukan deskripsi..."

@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="row">
-                    <x-adminlte-input-file id="images" name="images[]" label="Upload Gambar" fgroup-class="col-md-3"
+                    <x-adminlte-input-file id="images" name="images[]" label="Upload Gambar" fgroup-class="col-md-4"
                         placeholder="Choose multiple files..." legend="Choose" multiple>
                         <x-slot name="prependSlot">
                             <div class="input-group-text text-primary">
@@ -32,16 +32,20 @@
                             </div>
                         </x-slot>
                     </x-adminlte-input-file>
-                    <x-adminlte-input name="video" label="Link Video" placeholder="Link Video" fgroup-class="col-md-3"
-                        enable-old-support value="{{ old('video') }}" />
                     <x-adminlte-input type="number" name="whatsapp_number" label="Nomor WA" placeholder="ex. 089884..."
-                        fgroup-class="col-md-3" enable-old-support value="{{ old('whatsapp_number') }}" />
-                    <x-adminlte-select2 name="city_id" label="Kota" fgroup-class="col-md-3" enable-old-support>
+                        fgroup-class="col-md-4" enable-old-support value="{{ old('whatsapp_number') }}" />
+                    <x-adminlte-select2 name="city_id" label="Kota" fgroup-class="col-md-4" enable-old-support>
                         <option value="" disabled selected>Pilih Kota</option>
                         @foreach ($cities as $city)
                             <option value="{{ $city->id }}">{{ $city->city_name }}</option>
                         @endforeach
                     </x-adminlte-select2>
+                </div>
+                <div class="row">
+                    <x-adminlte-input name="video" label="Youtube Video" placeholder="Youtube Video"
+                        fgroup-class="col-md-6" enable-old-support value="{{ old('video') }}" />
+                    <x-adminlte-input name="general_video" label="General Video" placeholder="General Video"
+                        fgroup-class="col-md-6" enable-old-support value="{{ old('general_video') }}" />
                 </div>
                 <div class="row">
                     <x-adminlte-textarea label="Deskripsi" name="description" placeholder="Masukan deskripsi..."

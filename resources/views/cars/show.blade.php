@@ -49,10 +49,18 @@
                         <p>{{ $car->showroom->showroom_name ?? '-' }}</p>
                     </div>
                     <div class="form-group">
-                        <label for="video">Link Video</label>
+                        <label for="video">Youtube Video</label>
                         <p>
                             <a href="{{ $car->video }}" target="_blank">
                                 {{ $car->video }}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label for="general_video">General Video</label>
+                        <p>
+                            <a href="{{ $car->general_video }}" target="_blank">
+                                {{ $car->general_video }}
                             </a>
                         </p>
                     </div>

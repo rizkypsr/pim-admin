@@ -21,9 +21,9 @@
                     <div class="d-flex justify-content-between">
                         <button type="button" onClick="javascript:history.back()"
                             class="btn btn-secondary">Kembali</button>
-                        @if ($car->video)
-                            <a href="{{ $car->video }}" target="_blank" class="btn btn-primary">Lihat
-                                Review Mobil
+                        @if ($car->general_video)
+                            <a href="{{ $car->general_video }}" target="_blank" class="btn btn-primary">
+                                Lihat Review
                             </a>
                         @endif
                     </div>
